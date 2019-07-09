@@ -11,19 +11,18 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.List;
-//implements WebMvcConfigurer
 @Configuration
-public class MyWebMvcConfigurer extends WebMvcConfigurerAdapter {
+public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
-    @Override
+    /*@Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowCredentials(true)
                 .allowedMethods("GET","POST","DELETE","PUT")
                 .maxAge(3600);
-    }
-    /*@Override
+    }*/
+    @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
 
     }
@@ -60,7 +59,12 @@ public class MyWebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
+        /*registry.addMapping("/**");*/
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowCredentials(true)
+                .allowedMethods("GET","POST","DELETE","PUT")
+                .maxAge(3600);
     }
 
     @Override
@@ -111,5 +115,5 @@ public class MyWebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public MessageCodesResolver getMessageCodesResolver() {
         return null;
-    }*/
+    }
 }
