@@ -1,18 +1,20 @@
 package com.imis.frame.core.entity;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class BaseEntity implements Serializable {
-
+    //主键ID
+    @TableId("ID")
+    public String id;
+    //数据状态：0为删除，1为正常
+    public String status;
     //数据权限过滤预留字段
     public String org;
     //数据权限过滤预留字段
     public String orgTree;
-    //主键ID
-    public String id;
-    //数据状态：0为删除，1为正常
-    public String state;
     //创建人
     public String created;
     //创建时间
@@ -46,12 +48,12 @@ public class BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public String getState() {
-        return state;
+    public String getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCreated() {
