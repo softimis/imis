@@ -8,37 +8,25 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
     //主键ID
     @TableId("ID")
-    public String id;
+    private String id;
     //数据状态：0为删除，1为正常
-    public String status;
+    private String status;
     //数据权限过滤预留字段
-    public String org;
+    private String org;
     //数据权限过滤预留字段
-    public String orgTree;
+    private String orgTree;
     //创建人
-    public String created;
+    private String created;
+    //创建日期
+    private String createDate;
     //创建时间
-    public Date createTime;
+    private String createTime;
     //修改人
-    public String updated;
+    private String updated;
+    //修改日期
+    private String updateDate;
     //修改时间
-    public Date updateTime;
-
-    public String getOrg() {
-        return org;
-    }
-
-    public void setOrg(String org) {
-        this.org = org;
-    }
-
-    public String getOrgTree() {
-        return orgTree;
-    }
-
-    public void setOrgTree(String orgTree) {
-        this.orgTree = orgTree;
-    }
+    private String updateTime;
 
     public String getId() {
         return id;
@@ -56,6 +44,22 @@ public class BaseEntity implements Serializable {
         this.status = status;
     }
 
+    public String getOrg() {
+        return org;
+    }
+
+    public void setOrg(String org) {
+        this.org = org;
+    }
+
+    public String getOrgTree() {
+        return orgTree;
+    }
+
+    public void setOrgTree(String orgTree) {
+        this.orgTree = orgTree;
+    }
+
     public String getCreated() {
         return created;
     }
@@ -64,11 +68,19 @@ public class BaseEntity implements Serializable {
         this.created = created;
     }
 
-    public Date getCreateTime() {
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
@@ -80,11 +92,19 @@ public class BaseEntity implements Serializable {
         this.updated = updated;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 }

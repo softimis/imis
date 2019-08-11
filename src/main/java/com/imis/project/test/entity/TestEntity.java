@@ -5,13 +5,15 @@ import com.imis.frame.core.entity.BaseEntity;
 
 import java.io.Serializable;
 
-@TableName("TestEntity")
+@TableName("TB_TestEntity")
 public class TestEntity extends BaseEntity{
-    public String username;
-    public String password;
-    public int sex;
-    public boolean openstate;//开启状态
-    public String birthday;
+
+    private static final long serialVersionUID = 1L;
+    private String username;
+    private String password;
+    private int sex;
+    private boolean openstate;//开启状态
+    private String birthday;
 
     public TestEntity() {
     }

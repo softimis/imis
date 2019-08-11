@@ -1,18 +1,20 @@
 package com.imis.project.test.controller;
 
 import com.imis.frame.core.controller.BaseController;
+import com.imis.frame.core.service.BaseService;
 import com.imis.project.test.entity.TestEntity;
 import com.imis.project.test.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
 //@Controller
 @RequestMapping("/testController")
-public class TestController extends BaseController {
+public class TestController extends BaseController<TestEntity,TestService> {
 
     @Autowired
     public TestService testService;
@@ -27,8 +29,9 @@ public class TestController extends BaseController {
     }
 
     @GetMapping("/getTest")
-    public  String getTest(@RequestParam Map<String,Object> map){
-        System.out.println("getTest:"+map.get("searchInfo"));
-        return "查询的内容为："+map.get("searchInfo");
+    public List<TestEntity> getTest(@RequestParam Map<String,Object> map){
+        System.out.println("getTest:"+map.get("username"));
+        return testService.list(map);
     }
+
 }
