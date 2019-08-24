@@ -1,6 +1,7 @@
 package com.imis.project.test.entity;
 
-import com.baomidou.mybatisplus.annotations.TableName;
+//import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.imis.frame.core.entity.BaseEntity;
 
 import java.io.Serializable;

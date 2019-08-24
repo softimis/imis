@@ -1,6 +1,6 @@
 package com.imis.frame.core.service;
 
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.imis.frame.core.entity.BaseEntity;
 
 import java.io.Serializable;
@@ -12,10 +12,16 @@ public interface BaseService<T extends BaseEntity> extends IService {
     public boolean add(T baseEntity) throws Exception;
 
     //物理删除
-    public boolean delete(Serializable[] ids) throws Exception;
+    public boolean delete(Serializable id) throws Exception;
+
+    //批量物理删除
+    public boolean batchDelete(Serializable[] ids) throws Exception;
 
     //逻辑删除
-    public boolean remove(Serializable[] ids) throws Exception;
+    public boolean remove(T BaseEntity) throws Exception;
+
+    //批量逻辑删除
+    public boolean batchRemove(Serializable[] ids) throws Exception;
 
     //更新
     public boolean update(T BaseEntity) throws Exception;
@@ -25,4 +31,5 @@ public interface BaseService<T extends BaseEntity> extends IService {
 
     //获取列表
     public List<T> list(Map map);
+
 }
