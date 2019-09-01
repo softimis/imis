@@ -28,7 +28,6 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
      */
     @Override
     public boolean add(T baseEntity) throws Exception{
-        boolean isSuccess = true;
         if(StringUtils.isEmpty(baseEntity.getId())){
             baseEntity.setId(StringUtils.getUUID());
         }
@@ -37,11 +36,8 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
         baseEntity.setUpdateDate(DateUtils.getCurrentDate());
         baseEntity.setUpdateTime(DateUtils.getCurrentTime());
         baseEntity.setStatus("1");
-        int i = baseMapper.insert(baseEntity);
-        if(i!=1){
-            isSuccess = false;
-        }
-        return isSuccess;
+        baseMapper.insert(baseEntity);
+        return true;
     }
 
     /**
