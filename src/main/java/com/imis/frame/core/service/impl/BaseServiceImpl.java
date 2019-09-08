@@ -1,5 +1,6 @@
 package com.imis.frame.core.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.imis.frame.core.dao.BaseDao;
 import com.imis.frame.core.entity.BaseEntity;
@@ -27,7 +28,7 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
      * Version: 1.0
      */
     @Override
-    public boolean add(T baseEntity) throws Exception{
+    public void add(T baseEntity) throws Exception{
         if(StringUtils.isEmpty(baseEntity.getId())){
             baseEntity.setId(StringUtils.getUUID());
         }
@@ -36,8 +37,7 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
         baseEntity.setUpdateDate(DateUtils.getCurrentDate());
         baseEntity.setUpdateTime(DateUtils.getCurrentTime());
         baseEntity.setStatus("1");
-        baseMapper.insert(baseEntity);
-        return true;
+        myDao.insert(baseEntity);
     }
 
     /**
@@ -49,23 +49,8 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
      * Version: 1.0
      */
     @Override
-    public boolean delete(Serializable id) throws Exception {
-        boolean isSuccess = true;
-        int i = baseMapper.deleteById(id);
-        if(i!=1){
-            isSuccess = false;
-        }
-//        try {
-//            int i = baseMapper.deleteById(id);
-//            if(i!=1){
-//                isSuccess = false;
-//            }
-////            isSuccess = deleteById(id);
-//        }catch (Exception e){
-//            isSuccess = false;
-//            e.printStackTrace();
-//        }
-        return isSuccess;
+    public void delete(Serializable id) throws Exception {
+        myDao.deleteById(id);
     }
 
     /**
@@ -77,15 +62,8 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
      * Version: 1.0
      */
     @Override
-    public boolean batchDelete(Serializable[] ids) throws Exception {
-        boolean isSuccess = true;
-        try{
-            isSuccess = myDao.batchDelete(ArrayUtils.arrToList(ids));
-        }catch (Exception e){
-            isSuccess = false;
-            e.printStackTrace();
-        }
-        return isSuccess;
+    public void batchDelete(Serializable[] ids) throws Exception {
+        myDao.batchDelete(ArrayUtils.arrToList(ids));
     }
 
     /**
@@ -97,8 +75,12 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
      * Version: 1.0
      */
     @Override
-    public boolean remove(T baseEntity) throws Exception {
-        return myDao.remove(baseEntity);
+    public void remove(Serializable id) throws Exception {
+        BaseEntity baseEntity = (T)getById(id);
+        baseEntity.setUpdateDate(DateUtils.getCurrentDate());
+        baseEntity.setUpdateTime(DateUtils.getCurrentTime());
+        baseEntity.setStatus("0");
+        myDao.remove(baseEntity);
     }
 
     @Override
@@ -106,19 +88,36 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
         return false;
     }
 
+    /**
+     * Description: 公共修改方法
+     * Author: zcx
+     * Date: Created in 2019-09-02 21:53:40
+     * Param: [baseEntity]
+     * Return: void
+     * Version: 1.0
+     */
     @Override
-    public boolean update(T baseEntity) throws Exception {
-        return false;
-    }
-
-    @Override
-    public T getById(String id) {
-//        selectById(id);
-        return null;
+    public void update(T baseEntity) throws Exception {
+        baseEntity.setUpdateDate(DateUtils.getCurrentDate());
+        baseEntity.setUpdateTime(DateUtils.getCurrentTime());
+        myDao.updateById(baseEntity);
     }
 
     /**
-     * Description: 公共列表查询方法
+     * Description:  根据ID获取一个对象
+     * Author: zcx
+     * Date: Created in 2019-09-07 15:23:02
+     * Param: [id]
+     * Return: T
+     * Version: 1.0
+     */
+    @Override
+    public T getById(String id) {
+        return (T)myDao.selectById(id);
+    }
+
+    /**
+     * Description: 公共集合查询方法
      * Author: zcx
      * Date: Created in 2019-08-06 22:04:27
      * Param: [map]
@@ -127,7 +126,23 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
      */
     @Override
     public List<T> list(Map map) {
-        //return selectByMap(map);
-        return myDao.list(map);
+        return myDao.selectByMap(map);
+    }
+
+    /**
+     * Description: 公共分页查询
+     * Author: zcx
+     * Date: Created in 2019-09-08 14:52:31
+     * Param: [map]
+     * Return: com.baomidou.mybatisplus.extension.plugins.pagination.Page<T>
+     * Version: 1.0
+     */
+    @Override
+    public Page<T> pageQuery(Map map) {
+        Page<T> page = new Page<>();
+        page.setCurrent(Long.valueOf(String.valueOf(map.get("currentPage"))));
+        page.setSize(Long.valueOf(String.valueOf(map.get("pageSize"))));
+        page.setRecords(myDao.list(page,map));
+        return page;
     }
 }

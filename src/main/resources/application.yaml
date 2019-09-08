@@ -7,4 +7,17 @@ server:
 #配置数据源
 spring:
   profiles:
-    active: dev
+    active: pro
+
+#配置mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/com/imis/**/mapper/*Mapper.xml
+  type-aliases-package: com.imis.**.entity
+#关闭驼峰转下划线
+  configuration:
+    map-underscore-to-camel-case: false
+#逻辑删除配置
+  global-config:
+    db-config:
+      logic-delete-value: 0 #逻辑已删除
+      logic-not-delete-value: 1 #逻辑未删除

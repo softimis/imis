@@ -1,5 +1,6 @@
 package com.imis.project.test.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.imis.frame.core.controller.BaseController;
 import com.imis.project.test.entity.TestEntity;
 import com.imis.project.test.service.TestService;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-//@Controller
 @RequestMapping("/testController")
 public class TestController extends BaseController<TestEntity,TestService> {
 

@@ -1,13 +1,18 @@
 package com.imis.frame.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class BaseEntity implements Serializable {
     //主键ID
     @TableId("ID")
     private String id;
     //数据状态：0为删除，1为正常
+    @TableLogic
     private String status;
     //数据权限过滤预留字段
     private String org;
@@ -26,83 +31,4 @@ public class BaseEntity implements Serializable {
     //修改时间
     private String updateTime;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getOrg() {
-        return org;
-    }
-
-    public void setOrg(String org) {
-        this.org = org;
-    }
-
-    public String getOrgTree() {
-        return orgTree;
-    }
-
-    public void setOrgTree(String orgTree) {
-        this.orgTree = orgTree;
-    }
-
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(String updated) {
-        this.updated = updated;
-    }
-
-    public String getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
 }

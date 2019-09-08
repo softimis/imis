@@ -1,7 +1,9 @@
 package com.imis.frame.core.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.imis.frame.core.entity.BaseEntity;
+import org.apache.ibatis.annotations.Param;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,7 +17,7 @@ public interface BaseDao<T extends BaseEntity> extends BaseMapper {
      * Date: Created in 2019-08-16 21:11:07
      * Version: 1.0
      */
-    public boolean batchDelete(List<Serializable> ids);
+    public void batchDelete(List<Serializable> ids);
 
     /***
      * Description: 逻辑删除
@@ -39,5 +41,5 @@ public interface BaseDao<T extends BaseEntity> extends BaseMapper {
      * Date: Created in 2019-08-10 23:12:42
      * Version: 1.0
      */
-    public List<T> list(Map map);
+    public List<T> list(Page page,@Param("param") Map map);
 }
