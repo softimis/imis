@@ -6,7 +6,7 @@
         <!--<if test="username != null and '' != username"> and tb.username = #{username}</if>-->
     </sql>
 
-    <select id="list" parameterType="java.util.Map" resultType="com.imis.project.test.entity.TestEntity">
+    <select id="pageQuery" parameterType="java.util.Map" resultType="com.imis.project.test.entity.TestEntity">
       select tb.username as username,
              tb.password as password,
              tb.birthday as birthday,
@@ -25,7 +25,7 @@
         </foreach>
     </delete>
 
-    <update id="remove" parameterType="TestEntity">
+    <update id="remove" parameterType="com.imis.project.test.entity.TestEntity">
       update TB_TestEntity set
              updatedate = #{updateDate},
              updatetime = #{updateTime},

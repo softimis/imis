@@ -41,5 +41,5 @@ public interface BaseDao<T extends BaseEntity> extends BaseMapper {
      * Date: Created in 2019-08-10 23:12:42
      * Version: 1.0
      */
-    public List<T> list(Page page,@Param("param") Map map);
+    public List<T> pageQuery(Page page,@Param("param") Map map);
 }

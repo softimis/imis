@@ -142,7 +142,7 @@ public abstract class BaseServiceImpl<M extends BaseDao,T extends BaseEntity> ex
         Page<T> page = new Page<>();
         page.setCurrent(Long.valueOf(String.valueOf(map.get("currentPage"))));
         page.setSize(Long.valueOf(String.valueOf(map.get("pageSize"))));
-        page.setRecords(myDao.list(page,map));
+        page.setRecords(myDao.pageQuery(page,map));
         return page;
     }
 }
